@@ -1,0 +1,5 @@
+rush-01
+*.swo
+*.swp
+.vscode
+.DS_Store

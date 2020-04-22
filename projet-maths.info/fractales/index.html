@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	<title>fractales</title>
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script>
+			$(document).ready( function(){
+				function TrianglePascal( niv_){
+					var i, k;
+					var T_Result = new Array();
+					//-- Création tableau multidimensionnel
+					for( i =0; i< niv_; i++){
+						T_Result[i] = new Array();
+						T_Result[i][0]= 1; // 1st colonne à 1
+					}
+					//-- Calcul des Valeurs
+					for( i=1; i< niv_; i++){
+						for( k =1; k < i; k++){
+						T_Result[i][k] = T_Result[i-1][k-1] + T_Result[i-1][k];
+						}
+						//-- Dernière colonne à 1
+						T_Result[i][k] = 1;
+					}
+					return( T_Result);
+				}
+				function pow(x,niv_){
+					var T_Result = new Array();
+					for(var i = 0; i<= niv_; i++){
+						T_Result[i] = Math.pow(x,i);
+					}
+					return (T_Result);
+				}
+
+				var T_Pascal = new Array();
+				T_Pascal = TrianglePascal(101);
+				var canvas = document.getElementById("myCanvas");
+
+				function mandelIter(cx, cy, maxIter,n) {
+					var x = 0.0;
+					var y = 0.0;
+
+					var i = maxIter;
+					while (i-- && Math.pow(x,2) + Math.pow(y,2) <= 4) {
+						var px = pow(x,n);
+						var py = pow(y,n);
+						x = 0;
+						y = 0;
+						for(var k = 0; k <= n;k ++){
+							if(k%2==0){
+								if((k/2)%2==0){
+									x+=T_Pascal[n][k]*px[n-k]*py[k];
+								}else{
+									x-=T_Pascal[n][k]*px[n-k]*py[k];
+								}
+							}else{
+								if(((k-1)/2)%2==0){
+									y+=T_Pascal[n][k]*px[n-k]*py[k];
+								}else{
+									y-=T_Pascal[n][k]*px[n-k]*py[k];
+								}
+							}
+						}
+						x+= cx;
+						y+= cy;
+					}
+					return maxIter - i;
+				}
+
+				function mandelbrot(canvas, xmin, xmax, ymin, ymax, iterations,n) {
+					var width = canvas.width/2 + 80;
+					var height = canvas.height/2 +100;
+
+					var ctx = canvas.getContext('2d');
+					var img = ctx.getImageData(0, 0, width, height);
+					var pix = img.data;
+
+					for (var ix = 0; ix < width; ix++) {
+						for (var iy = 0; iy < height; iy++) {
+					    	var x = xmin + (xmax - xmin) * ix / (width-1);
+					    	var y = ymin + (ymax - ymin) * iy / (height-1);
+					    	var i = mandelIter(x, y, iterations,n);
+							var ppos = 4*(width * iy + ix);
+
+							if (i > iterations){
+								pix[ppos] = 0;
+								pix[ppos+1] = 0;
+								pix[ppos+2] = 0;
+					    	}else{
+								var c = 3 * Math.log(i) / Math.log(iterations);
+						        if (c < 1) {
+						          pix[ppos] = 255 * c;
+						          pix[ppos + 1] = 0;
+						          pix[ppos + 2] = 0;
+						        }
+						        else if ( c < 2 ) {
+						          pix[ppos] = 255;
+						          pix[ppos + 1] = 255 * (c - 1);
+						          pix[ppos + 2] = 0;
+						        } else {
+						          pix[ppos] = 255;
+						          pix[ppos + 1] = 255;
+						          pix[ppos + 2] = 255 * (c - 2);
+						        }
+							}
+							pix[ppos+3] = 255;
+						}
+					}
+					ctx.putImageData(img, 160, 100);
+				}
+				function clearCanvas() {
+					var ctx = canvas.getContext('2d');     // gets reference to canvas context
+					ctx.beginPath();    // clear existing drawing paths
+					ctx.save();         // store the current transformation matrix
+
+					// Use the identity matrix while clearing the canvas
+					ctx.setTransform(1, 0, 0, 1, 0, 0);
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					ctx.restore();        // restore the transform
+				}
+
+				var n = document.getElementById("myRange");
+				var i = document.getElementById("myRange2");
+				mandelbrot(canvas,-1.8,1.2,-1.5, 1.5,15,2);
+				n.oninput = function() {
+					clearCanvas();
+					mandelbrot(canvas,-1.8,1.2,-1.5,1.5,i.value,n.value);
+				};
+				i.oninput = function() {
+					clearCanvas();
+					mandelbrot(canvas,-1.8,1.2,-1.5,1.5,i.value,n.value);
+				};
+			});
+		</script>
+	</head>
+	<body style="margin: 0 auto; padding: 20px 0; text-align: center">
+		<canvas id="myCanvas" width="800" height="500" style="border:1px solid black"></canvas><br>
+		n :<input type="number" id="myRange">
+		i :<input type="number" id="myRange2">
+	</body>
+</html>

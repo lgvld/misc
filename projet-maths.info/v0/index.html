@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+	<head>
+		<title>~</title>
+		<meta charset="utf-8">
+		<meta name="robots" content="noindex">
+		<link href="projet.css" rel="stylesheet">
+		<!-- <link rel="icon" type="image/png" href="favicon.png"> -->
+	</head>
+	<body>
+
+		<div id="menu-left">
+			<input type="number" class="item" id="mod" min="0" placeholder="mod" title="mod">
+			<input type="number" class="item" id="n" min="0" step=".1" placeholder="n" title="n">
+			<button class="item" id="random">random values</button>
+			<button class="item" id="steps">steps are enabled</button>
+			<button class="item" id="axis" value="hide">show axis</button>
+			<p id="authors">made by<br>Nguyen & Louis</p>
+			<p id="rapport"><a href="../rapport/">RAPPORT</a></p>
+		</div>
+
+		<div id="wrapper">
+		</div>
+
+		<div id="menu-right">
+			<button class="item" id="screenshot">screenshot</button>
+			<button class="item" id="save">save</button>
+			<div id="saved-configs">
+			</div>
+		</div>
+
+		<!-- <script src="live.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+		<!-- <script src="p5.min.js"></script> -->
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script> -->
+		<!-- <script src="jquery-3.3.1.min.js"></script> -->
+		<script src="projet.js"></script>
+	</body>
+</html>

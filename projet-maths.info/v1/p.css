@@ -1,0 +1,137 @@
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+	height: 100%;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/*color: #222;*/
+	display: grid;
+	font: 1.6rem Inconsolata, monospace;
+	grid-template-columns: 1fr 5px 5fr 5px 1fr;
+	height: 100%;
+	text-rendering: optimizeLegibility;
+}
+
+body > .sep {
+	background: linear-gradient(#ffdc00, #fafafa);
+}
+
+canvas {
+	display: block;
+}
+
+/*****************************************************************************/
+
+.menu {
+	/*align-items: flex-start;*/
+	background: #fafafa;
+	display: flex;
+	flex-direction: column;
+	/*justify-content: center;*/
+	/*padding: 10px;*/
+}
+
+/*.menu ~ .menu {
+	align-items: flex-end;
+}*/
+
+.menu > * {
+	color: inherit;
+	font: 2rem Inconsolata, monospace;
+	min-height: 6.4rem;
+	padding: 0 1.6rem;
+	width: 100%;
+}
+
+.menu input,
+.menu button {
+	cursor: pointer;
+}
+
+/*.menu > * + * {
+	margin-top: 5px;
+}
+*/
+/*.menu > .sep {
+	background: #ff851b;
+	background: linear-gradient(to right, #ff851b, #fafafa);
+	height: 5px;
+	width: 50%;
+}*/
+
+/*.menu ~ .menu .sep {
+	background: linear-gradient(to right, #fafafa, #ff851b);
+}*/
+
+.menu input[type='number'] {
+	/*-moz-appearance: textfield;*/
+	border: 0;
+}
+
+.menu input[type='number'] + input[type='number'] {
+	border-top: 1px solid #eee;
+}
+
+.menu button {
+	color: #001f3f;
+	background: transparent;
+	/*background: linear-gradient( #fafafa, #ff851b, #fafafa);*/
+	border: 0;
+	transition: .2s opacity;
+}
+
+.menu button:hover {
+	opacity: .75;
+}
+
+.menu button:focus {
+	outline: none;
+}
+
+.menu footer {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto 0;
+	opacity: .5;
+	padding: 1rem 0;
+	text-align: center;
+	transition: .4s opacity;
+}
+
+.menu footer:hover {
+	opacity: .8;
+}
+
+.menu footer p {
+	/*color: #eee;*/
+	font: 1.2rem Vollkorn, serif;
+	line-height: 1.6;
+}
+
+.menu footer p a {
+	color: #001f3f;
+	text-decoration: none;
+}
+
+.menu footer p a:hover {
+	background: #ffdc00;
+}
+
+.menu footer p a:before {
+	content: '~ ';
+}
+
+.menu footer p a:after {
+	content: ' ~';
+}

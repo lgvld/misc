@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	<title>orbit</title>
+	<meta charset="utf-8">
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+		<script>
+			$(document).ready( function(){
+				var c = document.getElementById("myCanvas");
+				var ctx = c.getContext("2d");
+				var n = document.getElementById("myRange");
+				var mod = document.getElementById("myRange2");
+				var orb = [];
+				function compare(tab1, tab2){
+					if(tab1.length != tab2.length){
+						return false;
+					}else{
+						for(var i = 0; i < tab1.length; i++){
+							if(!tab2.includes(tab1[i])) return false;
+						}
+						return true;
+					}
+				}
+				function pgcd(m,n){
+					var r;
+				    while(m%n){
+				        r=m%n;
+				        m=n;
+				        n=r;
+				    }
+				    return n;
+				}
+				function PremiersEntreEux(m,n){
+    				return pgcd(m,n)==1;
+				}
+				function orbit(mod,n){
+					var t = [];
+					for(var i = 0; i<mod; i++){
+						t.push(true);
+						orb.push([]);
+					}
+					for(var i = 0; i<mod; i++){
+						tmp = i;
+						do{
+							orb[i].push(tmp);
+							t[tmp] = false;
+							tmp = (tmp*n)%mod;
+						}while(t[tmp]);
+						for(var j = 0; j<mod; j++){
+							t[j]= true;
+						}
+					}
+				}
+				function clearCanvas() {
+					var ctx = c.getContext('2d');     // gets reference to canvas context
+					ctx.beginPath();    // clear existing drawing paths
+					ctx.save();         // store the current transformation matrix
+
+					// Use the identity matrix while clearing the canvas
+					ctx.setTransform(1, 0, 0, 1, 0, 0);
+					ctx.clearRect(0, 0, c.width, c.height);
+					ctx.restore();        // restore the transform
+				}
+				function update(){
+					orb = [];
+					var orb_real = [];
+					var check = 0;
+					clearCanvas();
+					ctx.font = "30px Arial";
+					ctx.strokeText("mod : "+mod.value, 10, 50);
+					ctx.strokeText("n : "+n.value, 10, 100);
+					if(PremiersEntreEux(mod.value,n.value)){
+						orbit(mod.value,n.value);
+						ctx.font = "10px Arial";
+						var h = 150;
+						for(var k = 0; k < orb.length; k++){
+							check = 0;
+							for(var l = 0; l < orb_real.length; l++){
+								if(compare(orb[k],orb_real[l])){
+									check = 1;
+								}
+							}
+							if(!check) orb_real.push(orb[k]);
+						}
+						ctx.strokeText("Il y a "+orb_real.length+" orbites",10,125);
+
+						for(var i = 0; i < orb_real.length; i++){
+							for(var j = 0; j < orb_real[i].length; j++){
+								if(j == orb_real[i].length-1){
+									ctx.strokeText(orb_real[i][j],10 + 25*j,h + 10*i);
+								}else{
+									ctx.strokeText(orb_real[i][j]+" ->",10 + 25*j,h + 10*i);
+								}
+							}
+						}
+					}else{
+						ctx.strokeText("Mod et n ne sont pas premier entre eux",10,150);
+					}
+				}
+
+				update();
+				n.oninput = function() {
+					update();
+				};
+				mod.oninput = function() {
+					update();
+				};
+			});
+		</script>
+	</head>
+	<body style="margin: 0 auto; padding: 20px 0; text-align: center">
+		<canvas id="myCanvas" width="800" height="500" style="border:1px solid black;"></canvas><br>
+		n :<input type="range" min="2" max="150" value="2" id="myRange">
+		mod :<input type="range" min="2" max="300" value="2" id="myRange2">
+
+	</body>
+</html>

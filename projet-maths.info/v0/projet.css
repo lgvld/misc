@@ -1,0 +1,176 @@
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+	height: 100%;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	/*color: #000;*/
+	display: grid;
+	font: 1.6rem monospace;
+	grid-template-columns: 1fr 5fr 1fr;
+	height: 100%;
+	text-rendering: optimizeLegibility;
+}
+
+/**/
+
+#menu-left {
+	align-items: center;
+	background: #fafafa;
+	border-right: 5px solid #ffdc00;
+	display: flex;
+	flex-direction: column;
+}
+
+#menu-left .item {
+	min-height: 6rem;
+	width: 100%;
+}
+
+#menu-left input[type='number'] {
+	border: 0;
+	border-bottom: 1px solid #ddd;
+	cursor: pointer;
+	font-family: monospace;
+	padding: 1.6rem;
+}
+
+#menu-left button {
+	border: 0;
+	cursor: pointer;
+	font-family: monospace;
+	transition: opacity .2s;
+}
+
+#menu-left button::-moz-focus-inner {
+	border: 0;
+}
+
+#menu-left button:hover {
+	opacity: .9;
+}
+
+#steps {
+	background: #3d9970;
+	/*color: #7fdbff;*/
+	color: #001f3f;
+}
+
+#random {
+	background: #ff851b;
+	color: #001f3f;
+}
+
+#axis {
+	background: #85144b;
+	/*color: #0074d9;*/
+	color: #001f3f;
+}
+
+#authors {
+	color: #111;
+	font: 1.2rem Vollkorn, serif;
+	margin: auto;
+	opacity: .2;
+	text-align: center;
+}
+
+#rapport {
+	color: #111;
+	font: 1.2rem Vollkorn, serif;
+	margin: auto;
+	opacity: .2;
+	text-align: center;
+}
+
+/**/
+
+#menu-right {
+	align-items: center;
+	background: #fafafa;
+	border-left: 5px solid #ffdc00;
+	display: flex;
+	flex-direction: column;
+}
+
+#menu-right .item {
+	min-height: 6rem;
+	width: 100%;
+}
+
+#menu-right button {
+	border: 0;
+	cursor: pointer;
+	font-family: monospace;
+	transition: opacity .2s;
+}
+
+#menu-right button::-moz-focus-inner {
+	border: 0;
+}
+
+#menu-right button:hover {
+	opacity: .8;
+}
+
+#screenshot {
+	background: #ff4136;
+	color: #001f3f;
+}
+
+#save {
+	background: #ddd;
+	color: #b10dc9;
+}
+
+#saved-configs {
+	align-items: center;
+	padding: 1.6rem 0;
+	display: flex;
+	flex-direction: column;
+}
+
+#saved-configs a {
+	color: #001f3f;
+	display: inline-block;
+	margin-bottom: .6rem;
+	padding: .1rem .2rem;
+	/*pointer-events: none;*/
+	transition: background .1s, color .1s;
+}
+
+#saved-configs a:hover {
+	color: #fafafa;
+	background: #111;
+}
+
+/*#nav {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+#previous,
+#next {
+	background: #ddd;
+	color: #b10dc9;
+}*/
+
+/**/
+
+#wrapper {
+	/*height: 100%;*/
+}
+
+canvas {
+	display: block;
+	height: 100%;
+}
